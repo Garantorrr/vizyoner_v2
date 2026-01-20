@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2 style="margin-bottom: 30px; border-left: 6px solid var(--accent); padding-left: 15px;">
+        "{{ query }}" için sonuçlar
+    </h2>
+    
+    {% if sonuclar %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px;">
+        {% for m in sonuclar %}
+            {% if m.poster_path %}
+            <a href="{{ url_for('film_detay', film_id=m.id) }}" style="text-decoration: none; color: inherit;">
+                <div style="background: var(--card); border-radius: 12px; overflow: hidden; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                    <img src="https://image.tmdb.org/t/p/w500{{ m.poster_path }}" style="width: 100%; display: block;">
+                    <div style="padding: 15px; text-align: center;">
+                        <p style="margin: 0; font-weight: bold; font-size: 0.9em;">{{ m.title }}</p>
+                        <p style="margin: 5px 0 0 0; color: #888; font-size: 0.8em;">{{ m.release_date[:4] if m.release_date else 'Tarih Yok' }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 50px;">
+        <p style="font-size: 1.2em; color: #ccc;">Aradığınız kriterlere uygun film bulunamadı.</p>
+        <a href="{{ url_for('index') }}" style="color: var(--accent); text-decoration: none;">Ana sayfaya dön</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

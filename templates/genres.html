@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Türlerimi Yönet - Vizyoner{% endblock %}
+{% block content %}
+<div style="width: 100%;">
+    <h1>🎭 İlgi Alanlarını Seç</h1>
+    <p>Sana daha iyi öneriler sunabilmemiz için sevdiğin türleri işaretle.</p>
+
+    <form action="{{ url_for('manage_genres') }}" method="POST" style="background: var(--color-input-bg); padding: 30px; border-radius: 12px; margin-top: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px;">
+            {% for genre in all_genres %}
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px; border: 1px solid #333; border-radius: 8px; transition: 0.3s;">
+                <input type="checkbox" name="genres" value="{{ genre }}" {% if genre in current_genres %}checked{% endif %} style="width: 20px; height: 20px; accent-color: var(--color-accent);">
+                {{ genre }}
+            </label>
+            {% endfor %}
+        </div>
+        <button type="submit" style="margin-top: 30px; width: 200px; display: block; margin-left: auto;">Tercihleri Kaydet</button>
+    </form>
+</div>
+{% endblock %}

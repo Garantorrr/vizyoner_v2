@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="max-width: 1000px; margin: 40px auto; color: white;">
+    <div style="display: flex; gap: 40px; background: var(--card); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div style="flex: 1;">
+            <img src="https://image.tmdb.org/t/p/w500{{ film.poster_path }}" style="width: 100%; border-radius: 15px;">
+        </div>
+        <div style="flex: 2;">
+            <h1 style="color: var(--accent); margin-top: 0;">{{ film.title }}</h1>
+            <p style="font-style: italic; color: #aaa;">{{ film.tagline }}</p>
+            <p><strong>Yönetmen:</strong> {{ yonetmen }}</p>
+            <p><strong>Puan:</strong> ⭐ {{ film.vote_average|round(1) }}</p>
+            <hr style="border: 0; border-top: 1px solid #444;">
+            <h3>Özet</h3>
+            <p style="line-height: 1.6;">{{ film.overview or "Özet bilgisi bulunamadı." }}</p>
+            <h3>Oyuncular</h3>
+            <p>
+                {% for o in oyuncular %}
+                <span style="background: #333; padding: 3px 10px; border-radius: 5px; font-size: 0.8em; margin: 2px; display: inline-block;">{{ o.name }}</span>
+                {% endfor %}
+            </p>
+            <br>
+            <a href="/" style="color: var(--accent); text-decoration: none;">← Geri Dön</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
